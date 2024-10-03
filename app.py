@@ -1,43 +1,42 @@
-from flask import Flask, render_template, request, redirect, url_for, session
-import pyrebase
+import firebase_admin
+from firebase_admin import db
+import json
 
-app = Flask(__name__)
-app.secret_key = "super_secret_key"
 
-# Firebase configuration
-firebaseConfig = {
-#  Add your apikey here;
-}
+cred_obj =firebase_admin.credentials.Certificate('path/to/serviceAccountKey.json')
 
-firebase = pyrebase.initialize_app(firebaseConfig)
-auth = firebase.auth()
+default_app=firebase_admin.initialize_app(cred_obj,{
+    'databaseURL': 'https://your-database-name.firebaseio.com'
+})
 
-@app.route('/')
-def index():
-    return render_template('index.html')
+ref =db.reference("/")
 
-@app.route('/login', methods=['POST'])
-def login():
-    email = request.form['email']
-    password = request.form['password']
-    try:
-        user = auth.sign_in_with_email_and_password(email, password)
-        session['user'] = user
-        return redirect(url_for('dashboard'))
-    except:
-        return 'Login Failed'
 
-@app.route('/dashboard')
-def dashboard():
-    if 'user' in session:
-        return 'Welcome to the Dashboard'
-    else:
-        return redirect(url_for('index'))
+ref.set({
+    "Books":
+    {
+        "Best_Sellers":-1
+    }
+})
 
-@app.route('/logout')
-def logout():
-    session.pop('user')
-    return redirect(url_for('index'))
+ref = db.reference("/Books/Best_Sellers")
 
-if __name__ == '__main__':
-    app.run(debug=True)
+
+with open("data.json", "r") as f:
+    file_contents =json.load(f)
+
+ref.set(file_contents)
+
+for key, value in file_contents.items():
+    ref.push().set(value)
+
+
+
+# ========================= Dta Modification ================================== 
+# ref = db.reference("/Books/Best_Sellers")
+# best_sellers =ref.get()
+# print(best_sellers)
+
+# for key, value in best_sellers.items():
+#     if (value["Author"]=="J.R.R. Tolkien"):
+#         ref.child(key).update({"Price":80})
