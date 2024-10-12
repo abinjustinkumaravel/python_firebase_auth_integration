@@ -142,11 +142,6 @@ This project is licensed under the [MIT License](LICENSE).
 If you have any questions or feedback, please reach out:
 
 - **GitHub**: [abinjustinkumaravel](https://github.com/abinjustinkumaravel)
-- **Email**: your-email@example.com
+- **Email**: abinjustinkumaravel@gmail.com
 
 Happy coding!
-
-```
-
-Replace `abinj2003@gmail.com` with your actual email if you'd like to provide it for contact purposes. This `README.md` file now includes your specific GitHub repository link for easy access.
-```
