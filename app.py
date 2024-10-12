@@ -2,7 +2,6 @@ import firebase_admin
 from firebase_admin import db
 import json
 
-
 cred_obj =firebase_admin.credentials.Certificate('path/to/serviceAccountKey.json')
 
 default_app=firebase_admin.initialize_app(cred_obj,{
@@ -10,7 +9,6 @@ default_app=firebase_admin.initialize_app(cred_obj,{
 })
 
 ref =db.reference("/")
-
 
 ref.set({
     "Books":
@@ -29,6 +27,9 @@ ref.set(file_contents)
 
 for key, value in file_contents.items():
     ref.push().set(value)
+
+
+
 
 
 
