@@ -1,6 +1,3 @@
-Here's the updated `README.md` file with your GitHub repository link included:
-
-````markdown
 # Python Firebase Authentication Integration
 
 Welcome to the **Python Firebase Authentication Integration** project! This guide will help you set up Firebase authentication in your Python application using the `firebase-admin` SDK.
@@ -14,7 +11,6 @@ Before you begin, make sure you have the following:
    ```bash
    pip --version
    ```
-````
 
 ## Firebase Setup
 
